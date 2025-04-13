@@ -5,6 +5,10 @@ from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from tensorflow.keras.datasets import mnist
+import warnings
+from sklearn.exceptions import ConvergenceWarning
+
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 
 # Load MNIST dataset
@@ -74,11 +78,11 @@ plt.tight_layout()
 plt.show()
 
 # Train a classifier on PCA components
-clf_original = LogisticRegression(max_iter=1000)
+clf_original = LogisticRegression(max_iter=3000)
 clf_original.fit(x_train_flat, y_train)
 y_pred_original = clf_original.predict(x_test_flat)
 
-clf_pca = LogisticRegression(max_iter=1000)
+clf_pca = LogisticRegression(max_iter=3000)
 clf_pca.fit(x_train_pca, y_train)
 y_pred_pca = clf_pca.predict(x_test_pca)
 
